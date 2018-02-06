@@ -75,18 +75,8 @@ describe('network', function() {
                                 'body' in Response.prototype &&
                                 typeof ReadableStream !== 'undefined');
     if (!isFirefoxWithMozChunkedEncodingSupport && !isFetchWithStreamSupport) {
-      pending('Streaming not supported by user agent');
+      pending('Streaming not supported by user agent, currently the supported ones are Firefox, Chrome, and Edge.');
     }
-
-
-
-
-
-
-
-
-
-
 
     var stream = new PDFNetworkStream({
       url: pdf2,
