@@ -67,11 +67,22 @@ describe('network', function() {
     // The test is valid for FF only: the XHR has support of the
     // 'moz-chunked-array' response type.
     // TODO enable for other browsers, e.g. when fetch/streams API is supported.
+<<<<<<< HEAD
     var m = /Mozilla\/5.0.*?rv:(\d+).*? Gecko/.exec(userAgent);
     if (!m || m[1] < 9) {
       expect(true).toEqual(true);
       done();
       return;
+=======
+    var isFirefoxWithMozChunkedEncodingSupport = /Mozilla\/5.0.*?rv:(\d+).*? Gecko/.exec(userAgent);
+    var isFetchWithStreamSupport = typeof ReadableStream;
+
+    let isFetchWithStreamSupport = (typeof Response !== 'undefined' &&
+                                'body' in Response.prototype &&
+                                typeof ReadableStream !== 'undefined');
+    if (!isFirefoxWithMozChunkedEncodingSupport && !isFetchWithStreamSupport) {
+      pending('Streaming not supported by user agent, currently the supported ones are Firefox, Chrome, and Edge.');
+>>>>>>> c0e9bd5d9ffa5e238f3d8bbc99b6a959f06ffb08
     }
 
     var stream = new PDFNetworkStream({
